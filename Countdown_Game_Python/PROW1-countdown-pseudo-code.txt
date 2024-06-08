@@ -1,0 +1,77 @@
+function(select characters)
+while there are less than 9 letters selected:
+    ask user to input 'c' for a consonant or 'v' for a vowel
+    if input is 'c':
+        generate random consonant from frequency representative set
+        add consonant to game letters
+    if input is 'v':
+        generate random vowel from frequency representative set
+        add vowel to game letters
+    else:
+        report invalid user input
+
+function(dictionary reader)
+open words.txt file
+for each line in the file:
+    remove newline formatting and hyphens from each line
+    if word is less than or equal to 9 characters
+        store word as possible answer
+close words.txt file
+
+function(check guess)
+if user guess is a valid word
+    sort letters from the user guess alphabetically
+    generate all combinations of game letters and store the combinations at the length of the user guess
+    for each game letter:
+        for each iteration:
+            generate the combination of game letters and iteration
+            store the combination
+            if number of letters in combination matches number of letters in user's guess:
+                store combination in list of combinations of same length
+        store game letter in combination
+    for each combination of same length:
+        sort letters in the combination alphabetically
+        if sorted user guess matches sorted combination:
+            return points as the length of user guess
+    return points as zero if user guess is a word but do not match any combination
+else
+    return points as zero
+
+function(word lookup)
+for each possible answer word:
+    sort possible answer alphabetically
+for each game letter:
+        for each iteration:
+            generate the combination of game letters and iteration
+            store the combination
+        store game letter in combination
+sort the combinations out in alphabetical order
+sort the combinations from smallest length to longest length
+for every combination in combinations:
+    Sort the letters in the combination in alphabetical order
+remove the duplicates from the combinations
+for every word in alphabetical letter order:
+    assign the word to its alphabetical letter of that word
+for every word (with letter in alphabetical order):
+    for every combination:
+        if combination matches the word:
+            store the original word
+for every original word stored:
+    store words with the longest letter count
+return longest words
+
+START
+display welcome message
+generate game letters with function(select characters)
+display game letters and start the timer
+allow 30 seconds for user input
+if answer is input within 30 seconds:
+    extract all valid words from words.txt with function(dictionary reader)
+    calculate points scored by user using function(check guess)
+else:
+    user scores zero points
+report user's score
+check for best possible answers with function(word lookup)
+report best answers to user
+display game outro to user
+FINISH 
